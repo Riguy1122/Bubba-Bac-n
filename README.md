@@ -1,2 +1,2 @@
-# El Compa Bubba
-Your favorite desktop amigo!
+# Bubba Bacán
+Your favorite desktop buddy!
