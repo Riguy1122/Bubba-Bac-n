@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QPushButton
 from PySide6.QtCore import QTimer
-from moods import mood_list
+from moods import mood_dict
 from UtilityLogic import get_all_stats
 
 class MainWindow(QWidget):
@@ -16,7 +16,7 @@ class MainWindow(QWidget):
         self.setWindowTitle(title)
 
         self.button = QPushButton("Next mood")
-        self.label = QLabel(mood_list[self.current_mood]["message"])
+        self.label = QLabel(mood_dict[self.current_mood]["message"])
         self.label2 = QLabel("getting stats...")
         layout = QVBoxLayout()
 
@@ -42,8 +42,8 @@ class MainWindow(QWidget):
         self.label2.setText(self.text)
 
     def cycle_mood(self):
-        self.current_mood = (self.current_mood + 1) % len(mood_list)
-        self.label.setText(mood_list[self.current_mood]["message"])
+        self.current_mood = (self.current_mood + 1) % len(mood_dict)
+        self.label.setText(mood_dict[self.current_mood]["message"])
 
 
 if __name__ == "__main__":

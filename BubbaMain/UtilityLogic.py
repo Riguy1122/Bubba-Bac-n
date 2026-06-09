@@ -17,7 +17,8 @@ def get_mem_stats():
     mem_availGiB = round(mem.available/1073741824, 2)
     mem_info = {
         "used": mem_usedGiB,
-        "available": mem_availGiB
+        "available": mem_availGiB,
+        "percent": mem.percent
     }
     return mem_info
 
