@@ -31,14 +31,14 @@ def get_system_mood(stats):
 
     mood_modifiers = []
 # CPU
-    if cpu > 80:
+    if cpu > 70:
         mood_modifiers.append("CPU is strained!")
-    elif cpu > 40:
+    elif cpu > 30:
         mood_modifiers.append("CPU is considerably busy!")
     else:
         mood_modifiers.append("CPU is cozy.")
 # RAM
-    if  RAM_pcent > 80:
+    if  RAM_pcent > 70:
         mood_modifiers.append("RAM is congested!")
     elif  RAM_pcent > 45:
         mood_modifiers.append("RAM is a bit busy!")

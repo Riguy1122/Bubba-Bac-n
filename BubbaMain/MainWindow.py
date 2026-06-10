@@ -3,6 +3,8 @@ from PySide6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QPushB
 from PySide6.QtCore import QTimer
 from moods import mood_dict
 from UtilityLogic import get_all_stats
+from moods import get_system_mood
+from PySide6.QtQ
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -10,40 +12,38 @@ class MainWindow(QWidget):
 
         title = "Bubba Bacán"
         wi, hi = 500, 400
-        self.current_mood = 0
+        stats = get_all_stats()
         
+
         self.resize(wi, hi)
         self.setWindowTitle(title)
 
-        self.button = QPushButton("Next mood")
-        self.label = QLabel(mood_dict[self.current_mood]["message"])
-        self.label2 = QLabel("getting stats...")
+        self.primary_label = QLabel("Finding mood...")
+        self.message_label = QLabel("getting stats...")
+        self.modifiers_label = QLabel("")
         layout = QVBoxLayout()
 
-        self.button.clicked.connect(self.cycle_mood)
-
-        layout.addWidget(self.label)
-        layout.addWidget(self.button)
-        layout.addWidget(self.label2)
+        layout.addWidget(self.primary_label)
+        layout.addWidget(self.message_label)
+        layout.addWidget(self.modifiers_label)
         self.setLayout(layout)
 
         self.timer = QTimer()
-        self.timer.timeout.connect((self.update_stats))
+        self.timer.timeout.connect((self.update_bubba))
         self.timer.start(500)
+        
+
+    def update_bubba(self):
+        stats = get_all_stats()
+        mood = get_system_mood(stats)
+        #print(stats)
+        print(mood)
+        self.primary_label.setText(mood["primary"])
+        self.message_label.setText(mood["message"])
+        self.modifiers_label.setText("\n".join(mood["modifiers"]))
+        #self.setStyleSheet()
 
 
-
-    def update_stats(self):
-        self.stats_data = get_all_stats()
-        self.cpu = self.stats_data["cpu"]["percent"]
-        self.ram = self.stats_data["memory"]["used"]
-        self.battery = self.stats_data["battery"]["percent"]
-        self.text = f"CPU: {self.cpu}%\nRAM: {self.ram}\nBattery: {self.battery}%"
-        self.label2.setText(self.text)
-
-    def cycle_mood(self):
-        self.current_mood = (self.current_mood + 1) % len(mood_dict)
-        self.label.setText(mood_dict[self.current_mood]["message"])
 
 
 if __name__ == "__main__":
