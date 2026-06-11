@@ -4,7 +4,6 @@ from PySide6.QtCore import QTimer
 from moods import mood_dict
 from UtilityLogic import get_all_stats
 from moods import get_system_mood
-from PySide6.QtQ
 
 class MainWindow(QWidget):
     def __init__(self):
