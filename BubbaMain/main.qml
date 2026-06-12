@@ -10,21 +10,21 @@ ApplicationWindow {
     height: 400
     title: "Bubba Bacan"
     flags: Qt.Window | Qt.FramelessWindowHint
-    
-    DragHandler {
-        target: null
+    color: "#87CEFA"
 
-        onActiveChanged: {
-            if (active) {
-                root.startSystemMove()
-            }
+
+    
+    Rectangle {
+        width: 20
+        height: 20
+        color: "red"
+        x: 0
+        y:0
+        z: 10
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.LeftButton
+            onPressed: root.startSystemMove()
         }
     }
-    Rectangle {
-        anchors.fill: parent
-        width: 10
-        height: 10
-        color: "#1395B5"
-    }
-    
 }
